@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Product example for Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/product/">
+  </head>
+
+  <body>
+    <div class="position-relative overflow-hidden p-3 p-md-0 m-md-0 text-center bg-light">
+      <div class="col-md-8 p-lg-8 mx-auto my-5">
+        <% if current_user == nil %>
+          <h1 class="display-4 font-weight-normal">Bienvenu.e ! Découvres les événements autour de chez toi !</h1>
+        <% else %>
+          <h1 class="display-4 font-weight-normal">Bienvenu.e <%= current_user.email%> !<br> Découvres les événements autour de chez toi !</h1>
+        <% end %>
+        <p class="lead font-weight-normal">Centralise toutes tes réservations d'événements sur notre plateforme : réservation, modification, annulation, etc. </p>
+        <button class="btn btn-outline-secondary"><%= link_to "Créer un nouvel événement !", new_event_path %></a>
+      </div>
+    </div>
+
+    <div class="card-group">
+      <div class="card">
+        <img class="card-img-top" src="https://images.pexels.com/photos/15409812/pexels-photo-15409812.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Card image cap">
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="https://images.pexels.com/photos/1588075/pexels-photo-1588075.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Card image cap">
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="https://images.pexels.com/photos/2513605/pexels-photo-2513605.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Card image cap">
+      </div>
+    </div>
+
+    <br><h2 class="display-8 font-weight-normal" >N0S EVENEMENTS : </h2>
+      
+      <% @all_events.each do |event| %>
+        <div class="card text-center">
+          <div class="card-header">
+            <%= event.location %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= event.title.upcase %></h5>
+            <p class="card-text"><%= event.description %></p>
+            <button><%= link_to "Réserver maintenant !!",  event_path(event.id) %></button>
+          </div> 
+
+          <div class="card-footer text-muted">
+            <%= event.start_date %>
+          </div>
+          <br>
+      <% end %>
+    </div>
+
+    <footer class="container py-5">
+      <div class="row">
+        <div class="col-12 col-md">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mb-2"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+          <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Features</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Cool stuff</a></li>
+            <li><a class="text-muted" href="#">Random feature</a></li>
+            <li><a class="text-muted" href="#">Team feature</a></li>
+            <li><a class="text-muted" href="#">Stuff for developers</a></li>
+            <li><a class="text-muted" href="#">Another one</a></li>
+            <li><a class="text-muted" href="#">Last time</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Resource</a></li>
+            <li><a class="text-muted" href="#">Resource name</a></li>
+            <li><a class="text-muted" href="#">Another resource</a></li>
+            <li><a class="text-muted" href="#">Final resource</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Business</a></li>
+            <li><a class="text-muted" href="#">Education</a></li>
+            <li><a class="text-muted" href="#">Government</a></li>
+            <li><a class="text-muted" href="#">Gaming</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>About</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Team</a></li>
+            <li><a class="text-muted" href="#">Locations</a></li>
+            <li><a class="text-muted" href="#">Privacy</a></li>
+            <li><a class="text-muted" href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

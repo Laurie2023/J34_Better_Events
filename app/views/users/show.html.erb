@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Product example for Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/product/">
+  </head>
+
+  <body>
+    <div class="position-relative overflow-hidden p-3 p-md-0 m-md-0 text-center bg-light">
+      <div class="col-md-8 p-lg-8 mx-auto my-5">
+          <h1 class="display-4 font-weight-normal">Bienvenu.e <%= @user.first_name%> sur ton espace personnel !</h1>
+        <p class="lead font-weight-normal">Depuis cet espace, tu peux gérer tes informations personnelles et piloter les événements que tu organises. </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h5 class="card-header">Tes informations personnelles</h5>
+      <div class="card-body">
+        <p class="card-text"><b>
+        Ton nom :</b> <%= @user.last_name == nil ? "Aucun nom renseigné" : @user.last_name %> <br>
+        <b>Ton prénom :</b> <%= @user.first_name == nil ? "Aucun prénom renseigné" : @user.first_name %><br>
+        <b>Ton email :</b> <%= @user.email == nil ? "Aucun email renseigné" : @user.email %><br>
+        <b>Ta description :</b> <%= @user.description == nil ? "Aucune description renseignée" : @user.description %><br>
+        </p>
+        <a <%= link_to "Modifier mes informations personnelles",  edit_user_path(params[:id]) %> </a><br>
+        <a <%= link_to "Modifier mon email/mot de passe",  edit_user_registration_path(params[:id]) %> </a>
+      </div>
+    </div><br>
+
+
+    <div>
+      <% if @user.admin_events == [] %>
+      <h5 class="card-header">Tes événements</h5><br>
+        <p> Tu n'as organisé aucun événement pour le moment.</p>
+      <% else %>
+        <br><h2 class="display-8 font-weight-normal" >LES EVENEMENTS QUE TU ORGANISES : </h2>
+      <% end %>
+
+      <% @user.admin_events.each do |event| %>
+        <div class="card text-center">
+          <div class="card-header">
+            <%= event.title.upcase %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= event.location %></h5>
+            <p class="card-text"><%= event.description %></p>
+            <a class="btn btn-primary"> <%= link_to "Voir la page de cet événement !", event_path(event.id) %> </a>
+          </div>
+          <div class="card-footer text-muted">
+            <%= event.start_date %>
+          </div>
+          <br>
+        </div>
+      <% end %>
+    </div>
+
+    <footer class="container py-5">
+      <div class="row">
+        <div class="col-12 col-md">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mb-2"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+          <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Features</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Cool stuff</a></li>
+            <li><a class="text-muted" href="#">Random feature</a></li>
+            <li><a class="text-muted" href="#">Team feature</a></li>
+            <li><a class="text-muted" href="#">Stuff for developers</a></li>
+            <li><a class="text-muted" href="#">Another one</a></li>
+            <li><a class="text-muted" href="#">Last time</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Resource</a></li>
+            <li><a class="text-muted" href="#">Resource name</a></li>
+            <li><a class="text-muted" href="#">Another resource</a></li>
+            <li><a class="text-muted" href="#">Final resource</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Resources</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Business</a></li>
+            <li><a class="text-muted" href="#">Education</a></li>
+            <li><a class="text-muted" href="#">Government</a></li>
+            <li><a class="text-muted" href="#">Gaming</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>About</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="#">Team</a></li>
+            <li><a class="text-muted" href="#">Locations</a></li>
+            <li><a class="text-muted" href="#">Privacy</a></li>
+            <li><a class="text-muted" href="#">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+

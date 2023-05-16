@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>Créer un événement</title>
+  </head>
+  <body>
+    <h3>Crée un nouvel événement !</h3><br />
+    <p>Balance les informations via le formulaire ci-dessous</p>
+
+    <%= form_with model: @event do |form| %>
+      <%= form.label :title, "Titre :" %>
+      <%= form.text_field :title, class:"form-control", placeholder: "Mon super titre", required: true %>
+      <br />
+
+      <%= form.label :description, "Description :" %>
+      <%= form.text_area :description, class:"form-control", placeholder: "Ce super événement a pour objectif de rassembler...", required: true %>
+      <br /><br />
+
+      <%= form.label :localisation, "Lieu:" %>
+      <%= form.text_field :localisation, placeholder: "Dans mon jardin.", required: true %>
+      <br /> 
+
+      <%= form.label :start_date, "Date:" %>
+      <%= form.text_field :start_date, placeholder: "15/05/2023", required: true %>
+      <br /> 
+
+      <%= form.label :duration, "Durée (minutes) :" %>
+      <%= form.text_field :duration, placeholder: "90", required: true %>
+      <br /> 
+
+      <%= form.label :price, "Prix :" %>
+      <%= form.text_field :price, placeholder: "10", required: true %>
+      <br />
+
+      <br /> <br />
+      <%= form.submit "Créer un nouvel événement !", class: "create" %>
+    <% end %>
+
+  </body>
+</html>
