@@ -1,24 +1,30 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Events App
 
-Things you may want to cover:
+Base d'une plateforme de réservation d'événements pour les particuliers. 
 
-* Ruby version
+Lien du site : 
+https://events32.fly.dev
 
-* System dependencies
 
-* Configuration
+## Roadmap à date
 
-* Database creation
+- User : inscription, identification, et modification du profil.
+- Evenemet : une page par événement & possibilité de créer un nouvel événement
 
-* Database initialization
 
-* How to run the test suite
+## Installation
 
-* Services (job queues, cache servers, search engines, etc.)
+Télécharger le projet puis
 
-* Deployment instructions
+```ruby
+  bundle install
+  rails db:create
+  rails db:migrate
+  rails db:seed
+```
+    
+## Authors
 
-* ...
+- [@Laurie2023](https://github.com/Laurie2023)
+
