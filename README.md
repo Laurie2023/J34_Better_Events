@@ -3,15 +3,15 @@
 
 Base d'une plateforme de réservation d'événements pour les particuliers. 
 
-Lien du site : 
-https://events32.fly.dev
-
-
 ## Roadmap à date
 
-- User : inscription, identification, et modification du profil.
-- Evenemet : une page par événement & possibilité de créer un nouvel événement
+- User : inscription, identification, et modification du profil. Image de profil ajouté.
+- Evenemet : une page par événement avec une photo & possibilité de créer un nouvel événement
+- Paiement intégré.
+- Asset Pipeline mis en place.
 
+Lien Fly sur la précédente version.
+Ajout d'un thème Bootstraps.
 
 ## Installation
 
