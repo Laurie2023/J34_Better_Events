@@ -15,74 +15,26 @@
   <body>
     <div class="position-relative overflow-hidden p-3 p-md-0 m-md-0 text-center bg-light">
       <div class="col-md-8 p-lg-8 mx-auto my-5">
-          <h1 class="display-4 font-weight-normal">Bienvenu.e <%= @user.first_name%> sur ton espace personnel !</h1>
-        <p class="lead font-weight-normal">Depuis cet espace, tu peux gérer tes informations personnelles et piloter les événements que tu organises. </p>
+          <h1 class="display-4 font-weight-normal">Bienvenu.e <%= current_user.first_name%> sur ton espace personnel !</h1>
+        <p class="lead font-weight-normal">Depuis cet espace, tu peux gérer les détails de l'événement que tu organises. </p>'
       </div>
     </div>
 
-    <div class="form" >
-      <div class="container">
-        <div class="row justify-content-md-center">
-          <div class="col-3">
-            <h3>Avatar actuel</h3>
-            <%if @user.avatar.attached?%>
-              <%= image_tag @user.avatar, alt: 'avatar' , size: '300x300', class: 'img-fluid rounded border'%>
-              <br></br>
-            <%else%>
-              <img src="https://images.pexels.com/photos/15463010/pexels-photo-15463010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Avatar par défaut" class="img-thumbnail">
-            <%end%>
-          </div>
-          <div class="col d-flex align-items-center">
-            <%= form_with url: user_avatars_path(@user), local: true do |form| %>
-              <%= form.label :avatar, "Nouvel avatar :" %>
-              <%= form.file_field :avatar %>
-              <br /><br />
-              <%= form.submit "Modifier mon avatar", class: "create" %>
-            <% end %>
-          </div>
-        </div>
+    <div class="card" style="margin:2%">
+      <h5 class="card-header">Listes des participants :</h5>
+      <div class="card-body">
+        <p class="card-text">
+          <% (Event.find(params[:event_id]).attendances).each_with_index do |attendance, index| %>
+            <%= index+1 %>. <%= User.find(attendance.user_id).first_name %> <%= User.find(attendance.user_id).first_name %><br>
+          <% end %>
+          <% if Event.find(params[:event_id]).attendances.count == 0 %>
+            Aucun participant pour le moment.
+          <% end %>
+        </p> 
+        <%= link_to "Editer l'événement ", edit_event_path(params[:event_id]), class:"btn btn-secondary btn-sm" %><br>
       </div>
+    </div><br>
 
-      <div class="card">
-        <h5 class="card-header">Tes informations personnelles</h5>
-        <div class="card-body">
-          <p class="card-text"><b>
-          Ton nom :</b> <%= @user.last_name == nil ? "Aucun nom renseigné" : @user.last_name %> <br>
-          <b>Ton prénom :</b> <%= @user.first_name == nil ? "Aucun prénom renseigné" : @user.first_name %><br>
-          <b>Ton email :</b> <%= @user.email == nil ? "Aucun email renseigné" : @user.email %><br>
-          <b>Ta description :</b> <%= @user.description == nil ? "Aucune description renseignée" : @user.description %><br>
-          </p>
-          <%= link_to "Modifier mes informations personnelles",  edit_user_path(params[:id]), class:"btn btn-secondary btn-sm" %> <br></br>
-          <%= link_to "Modifier mon email/mot de passe",  edit_user_registration_path(params[:id]), class:"btn btn-secondary btn-sm" %>
-        </div>
-      </div><br>
-    </div>
-
-    <div class="form">
-      <% if @user.admin_events == [] %>
-      <h5 class="card-header">Tes événements</h5><br>
-        <p> Tu n'as organisé aucun événement pour le moment.</p>
-      <% else %>
-        <br><h2 class="display-8 font-weight-normal" >LES EVENEMENTS QUE TU ORGANISES : </h2>
-      <% end %>
-
-      <% @user.admin_events.each do |event| %>
-        <div class="card text-center">
-          <div class="card-header">
-            <%= event.title.upcase %>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title"><%= event.location %></h5>
-            <p class="card-text"><%= event.description %></p>
-            <%= link_to "Voir la page de cet événement !", event_path(event.id), class:"btn btn-warning btn-sm" %>
-          </div>
-          <div class="card-footer text-muted">
-            <%= event.start_date %>
-          </div>
-          <br>
-        </div>
-      <% end %>
-    </div>
 
     <footer class="container py-5">
       <div class="row">

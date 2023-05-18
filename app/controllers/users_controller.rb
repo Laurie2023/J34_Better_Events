@@ -20,6 +20,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @user.avatar.attach(params[:avatar])
 
     if @user.update(last_name:params[:last_name],first_name:params[:first_name],description:params[:description]) 
       redirect_to user_path(params[:id], success_user_update:true) 

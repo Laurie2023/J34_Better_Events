@@ -18,10 +18,10 @@
         <% if current_user == nil %>
           <h1 class="display-4 font-weight-normal">Bienvenu.e ! Découvres les événements autour de chez toi !</h1>
         <% else %>
-          <h1 class="display-4 font-weight-normal">Bienvenu.e <%= current_user.email%> !<br> Découvres les événements autour de chez toi !</h1>
+          <h1 class="display-4 font-weight-normal">Bienvenu.e <%= current_user.first_name%> !<br> Découvres les événements autour de chez toi !</h1>
         <% end %>
         <p class="lead font-weight-normal">Centralise toutes tes réservations d'événements sur notre plateforme : réservation, modification, annulation, etc. </p>
-        <button class="btn btn-outline-secondary"><%= link_to "Créer un nouvel événement !", new_event_path %></a>
+        <%= link_to "Créer un nouvel événement !", new_event_path, class:"btn btn-warning btn-lg" %></a>
       </div>
     </div>
 
@@ -37,25 +37,23 @@
       </div>
     </div>
 
-    <br><h2 class="display-8 font-weight-normal" >N0S EVENEMENTS : </h2>
-      
-      <% @all_events.each do |event| %>
-        <div class="card text-center">
-          <div class="card-header">
-            <%= event.location %>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title"><%= event.title.upcase %></h5>
-            <p class="card-text"><%= event.description %></p>
-            <button><%= link_to "Réserver maintenant !!",  event_path(event.id) %></button>
-          </div> 
-
-          <div class="card-footer text-muted">
-            <%= event.start_date %>
-          </div>
-          <br>
-      <% end %>
-    </div>
+    <br><h2>N0S EVENEMENTS : </h2>
+    <% @all_events.each do |event| %>
+      <div class="card text-center" style="margin:2%">
+        <div class="card-header">
+          <span><%= event.location.nil? ? event.location : event.location.capitalize %></span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= event.title.nil? ? event.title : event.title.upcase %></h5>
+          <p class="card-text"><%= event.description.nil? ? event.description : event.description.capitalize %></p>
+          <%= link_to "Réserver maintenant !!",  event_path(event.id), class:"btn btn-secondary btn-sm" %>
+        </div> 
+        <div class="card-footer text-muted">
+          <%= event.start_date %>
+        </div>
+      </div>
+    <% end %>
+    
 
     <footer class="container py-5">
       <div class="row">

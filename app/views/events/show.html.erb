@@ -20,7 +20,14 @@
       </div>
     </div>
 
-    <div class="card">
+    <%if @event.picture.attached?%>
+      <%= image_tag @event.picture, alt: 'picture',class:'rounded mx-auto d-block' ,style: 'max-width: 100%; max-height: 20rem;margin-bottom: 0'%>
+      <br></br>
+    <%else%>
+      <p style="margin:2%">=== Il n'y a pas encore de photo liée à cet événement ===</p>
+    <%end%>
+
+    <div class="card" style="margin:2%">
       <h5 class="card-header">Détails</h5>
       <div class="card-body">
         <p class="card-text">
@@ -30,10 +37,25 @@
         <b>Durée :</b> <%= @event.duration == nil ? "Aucune durée renseignée" : @event.duration %><br>
         <b>Prix :</b> <%= @event.price == nil ? "Aucun prix renseigné" : @event.price %><br>
         <b>Organisateur :</b> <%= @event.admin_id == nil ? "L'organisateur n'a pas souhaité partager son identité." : [User.find(@event.admin_id).first_name,User.find(@event.admin_id).last_name].join(" ") %><br>
-        <b>Nombre de participants à date :</b> <%= @event.users.count == 0 ? "Aucun participant pour le moment." : @event.users.count %><br>
+        <b>Nombre de participants à date :</b> <%= @event.users.count == 0 ? "Aucun participant pour le moment." : @event.users.count %>
         </p>
       </div>
-    </div><br>
+
+      <div class="card-body">
+        <% if (current_user.id != @event.admin_id) && (Attendance.all.map{|attend|[attend.user_id,attend.event_id]}.to_a.include?([current_user.id,params[:id].to_i]) == false) %>
+          <%= button_to "Réserver ma place", checkout_create_path(total: @event.price, eventid:@event.id), class: "btn btn-warning", data: {turbo: false} %>
+          <br>
+        <% else %>
+          <% if current_user.id == @event.admin_id %>
+            <%= link_to "Tableau de bord de l'événement", event_attendances_path(event_id:params[:id]), class:"btn btn-warning" %> 
+          <% else %>
+            <div class="alert alert-success" role="alert">
+              Tu participes déjà à cet événement !
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
     <footer class="container py-5">
       <div class="row">

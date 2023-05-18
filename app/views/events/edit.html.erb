@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>Editer un événement</title>
+  </head>
+  <body>
+    <div class="form">
+      <h3>Edites les informations de ton événement</h3><br />
+      <p>Fais une mise à jour de ton événement via le formulaire ci-dessous : <br>
+      <em> Le texte pré-rempli est celui actuallement disponible.</em></p>
+      <%= form_with model: @event do |form| %>
+        <%= form.label :title, "Titre :" %>
+        <%= form.text_field :title, class:"form-control", placeholder: @event.title, required: true %>
+        <br />
+  
+        <%= form.label :description, "Description :" %>
+        <%= form.text_area :description, class:"form-control", placeholder: @event.description, required: true %>
+        <br /><br />
+
+        <%= form.label :localisation, "Lieu:" %>
+        <%= form.text_field :location, class:"form-control",placeholder: @event.location, required: true %>
+        <br />
+  
+        <%= form.label :start_date, "Date:" %>
+        <%= form.text_field :start_date, class:"form-control",placeholder: @event.start_date, required: true %>
+        <br /> 
+  
+        <%= form.label :duration, "Durée (minutes) :" %>
+        <%= form.text_field :duration, class:"form-control",placeholder: @event.duration, required: true %>
+        <br /> 
+  
+        <%= form.label :price, "Prix :" %>
+        <%= form.text_field :price, placeholder: @event.price, class:"form-control", required: true %>
+        <br />
+
+        <%= form.label :picture, "Photo :" %><br />
+        <%= form.file_field(:picture) %>
+  
+        <%= form.submit "Editer l'événement !", class: "update" %>
+      <% end %>
+
+      <br>
+      <div><%= button_to "Supprimer l'événement", event_path(params[:id]), method: :delete %></div>
+    </div><br /> <br />
+
+  </body>
+</html>

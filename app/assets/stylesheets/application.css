@@ -10,8 +10,11 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
- */
-
- body {margin-left:2%;margin-right:2%;padding:0}
+ *= require main
+ *= require navbar
+ *= require user
+ *= require bootstrap-3
+ *= require bootstrap.min
+*/
+@import "themes/variables-2";
+@import "themes/bootswatch-2";

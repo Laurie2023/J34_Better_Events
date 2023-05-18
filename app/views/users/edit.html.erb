@@ -3,38 +3,39 @@
     <title>Modifier mon profil</title>
   </head>
   <body>
-    <h3>Edites mes informations personnelles !</h3><br />
-    <p>Fais une mise à jour de ton profil via le formulaire ci-dessous : <br>
-      <em> Le texte pré-rempli est celui de ton profil actuel. </em></p>
+    <div class="form">
+      <h3>Edites mes informations personnelles !</h3><br />
+      <p>Fais une mise à jour de ton profil via le formulaire ci-dessous : <br>
+        <em> Le texte pré-rempli est celui de ton profil actuel. </em></p>
 
-    <% if @user.errors.any? %>
-      <div class="alert alert-danger" role="alert">
-        <p>Nous n'avons pas réussi à mettre à jour ton profil pour la (ou les) raison(s) suivante(s) :</p>
-        <ul>
-          <% @user.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="form-page__form">
-      <%= form_tag url_for(action: 'update'), method: "patch" do %>
-
-        <%= label_tag 'Nom :' %>
-        <%= text_field_tag 'last_name', @user.last_name, class:"form-control", placeholder: @user.last_name,required: true %>
-        <br />
-
-        <%= label_tag 'Prénom :' %>
-        <%= text_field_tag 'first_name', @user.first_name, class:"form-control", placeholder: @user.first_name, required: true %>
-        <br /> <br />
-
-        <%= label_tag 'Description :' %>
-        <%= text_area_tag 'description', @user.description, class:"form-control", placeholder: @user.description %>
-        <br /> <br />
-
-        <%= submit_tag "Enregistrer de ton profil !" %> 
+      <% if @user.errors.any? %>
+        <div class="alert alert-danger" role="alert">
+          <p>Nous n'avons pas réussi à mettre à jour ton profil pour la (ou les) raison(s) suivante(s) :</p>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
+    
+      <div class="form-page__form">
+        <%= form_with model: @user do |form| %>
+          <%= form.label :last_name, "Non :" %>
+          <%= form.text_field :last_name, class:"form-control", placeholder: @user.last_name, required: true %>
+          <br />
+
+          <%= form.label :first_name, "Prénom :" %>
+          <%= form.text_field :first_name, class:"form-control", placeholder: @user.first_name, required: true %>
+          <br />
+        
+          <%= form.label :description, "Description :" %>
+          <%= form.text_area :description, class:"form-control", placeholder: @user.description, required: true %>
+          <br />
+        
+          <%= form.submit "Editer le profil !", class: "update" %>
+        <% end %>
+      </div>
     </div><br /> <br />
 
   </body>

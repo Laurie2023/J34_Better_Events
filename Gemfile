@@ -4,10 +4,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.0.0"
 gem 'faker'
 gem 'letter_opener'
-gem 'dotenv'
+gem 'dotenv-rails'
 gem 'mailjet'
 gem 'table_print'
 gem 'devise'
+gem 'stripe'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
